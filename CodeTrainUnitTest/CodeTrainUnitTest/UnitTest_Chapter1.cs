@@ -56,6 +56,15 @@ namespace CodeTrainUnitTest
             Assert.Equal(false, ch1.CheckPalindrome("tact coa", "tactcoa"));
         }
 
+        [Fact]
+        public void Test_CheckOneModification()
+        {
+            var ch1 = new Chapter1ArraysAndStrings();
+            Assert.Equal(true, ch1.CheckOneModification("pale", "ple"));
+            Assert.Equal(true, ch1.CheckOneModification("pales", "pale"));
+            Assert.Equal(true, ch1.CheckOneModification("pale", "bale"));
+            Assert.Equal(false, ch1.CheckOneModification("pale", "bake"));
+        }
 
     }
 }

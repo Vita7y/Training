@@ -103,6 +103,7 @@ namespace CodeTrain
                 return false;
             if (str1.Length != str2.Length)
                 return false;
+
             var tmp = str2.ToCharArray();
 
             foreach (var ch in str1)
@@ -123,6 +124,48 @@ namespace CodeTrain
             }
 
             return true;
+        }
+
+        public bool CheckOneModification(string str1, string str2)
+        {
+            if (string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2))
+                return false;
+
+            if (str1 == str2)
+                return true;
+
+            var countChange = 0;
+            int j = 0;
+
+            for (int i = 0; i < str1.Length; i++)
+            {
+                if (countChange > 1)
+                    return false;
+
+                if (j > str2.Length - 1)
+                {
+                    countChange++;
+                    continue;
+                }
+
+                if (str1[i] == str2[j])
+                {
+                    j++;
+                    continue;
+                }
+
+                countChange++;
+
+                if (i < str1.Length-1
+                   && str1[i+1] == str2[j])
+                    continue;
+
+                if (j < str2.Length-1 
+                    && str1[i] != str2[j + 1])
+                    j++;
+            }
+
+            return countChange < 2;
         }
     }
 }
