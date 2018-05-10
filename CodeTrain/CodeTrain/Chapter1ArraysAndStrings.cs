@@ -4,6 +4,9 @@ namespace CodeTrain
 {
     public class Chapter1ArraysAndStrings
     {
+		///1.1 Реализуйте алгоритм, определяющий, все л и символы в строке встречаются
+		///только один раз. А если при этом запрещено использование дополнительных
+		///структур данных?
         public bool CharsCounter_AllCharsUnique(string input)
         {
             var arr = new int[char.MaxValue];
@@ -17,6 +20,7 @@ namespace CodeTrain
             return true;
         }
 
+		///1.2. Для двух строк напишите метод, определяющий, является ли одна строка перестановкой другой
         public bool CharsCounter_AllCharsUnique2(string input)
         {
             var str = Sort(input.ToCharArray());
@@ -75,6 +79,9 @@ namespace CodeTrain
             return true;
         }
 
+		///1.3. Напишите метод, заменяющий все пробелы в строке символами ' %20 ' . Можете
+		///считать, что длина строки позволяет сохранить дополнительные символы,
+		///а фактическая длина строки известна заранее.
         public string ReplaceBlanks(string str, char replace)
         {
             var sb = new StringBuilder();
@@ -97,6 +104,11 @@ namespace CodeTrain
             return sb.ToString();
         }
 
+		///1.4. Напишите функцию, которая проверяет, является ли заданная строка перестановкой
+		///палиндрома. ( Палиндром - слово или фраза, одинаково читающиеся
+		///в прямом и обратном направлении; перестановка - строка, содержащая те
+		///же символы в другом порядке.) Палиндром не ограничивается словами из
+		///словаря.
         public bool CheckPalindrome(string str1, string str2)
         {
             if (string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2))
@@ -126,6 +138,10 @@ namespace CodeTrain
             return true;
         }
 
+		///1 .5. Существуют три вида модифицирующих операций со строками: вставка
+		///символа, удаление символа и замена символа. Напишите функцию, которая
+		///проверяет, находятся ли две строки на расстоянии одной модификации (или
+		///нуля модификаций).
         public bool CheckOneModification(string str1, string str2)
         {
             if (string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2))
