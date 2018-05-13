@@ -4,59 +4,74 @@ using System.Reflection.Metadata;
 
 namespace CodeTrain.DataAlg
 {
-    public class VLinkedList<T>
+    public class VLinkedList<T>:IEnumerable<T>
     {
-        public struct Leave
+        private class Node
         {
-            public Leave? Next;
-            public Leave? Prev;
+            public Node Next;
+            public Node Prev;
             public T Value;
         }
 
-        private Leave _list;
-        private Leave _first;
-        private Leave _last;
+        private Node _first;
+        private Node _last;
         private int _count;
 
         public VLinkedList()
         {
-            _list = new Leave();
-            _first = _last = _list;
+            _first = _last = null;
             _count = 0;
         }
 
         public void Add(T item)
         {
             _count++;
-            var leave = new Leave()
+            var node = new Node()
             {
                 Value = item,
                 Prev = _last
             };
-            if (_first.Prev == null)
-                _first = leave;
-            _last.Next = leave;
-            _last = leave;
+
+            if (_first == null)
+                _first = node;
+            if (_last != null)
+                _last.Next = node;
+            _last = node;
         }
 
         public void Delete(T item)
         {
             var cur = _first;
-            while (!cur.Equals(_last))
+            do
             {
                 if (cur.Value.Equals(item))
                 {
                     _count--;
+
+                    if (cur == _first)
+                        _first = cur?.Next;
+                    if (cur == _last)
+                        _last = cur?.Prev;
+
+                    if (cur.Next != null)
+                        cur.Next.Prev = cur.Prev;
                     if (cur.Prev != null)
-                    {
-                        var lh = cur.Prev.Value;
-                        lh.Next = cur.Next;
-                    }
-
+                        cur.Prev.Next = cur.Next;
                     return;
-
                 }
+
+                cur = cur.Next;
+            } while (cur!=null && !cur.Equals(_last));
+
+            if (cur!=null
+                &&cur.Value.Equals(item) 
+                && cur == _last)
+            {
+                _count--;
+                _last = cur.Prev;
+                _last.Next = null;
             }
+
         }
 
         public int Count()
@@ -66,12 +81,26 @@ namespace CodeTrain.DataAlg
 
         public T First()
         {
+            if (_first == null)
+                return default(T);
             return _first.Value;
         }
 
         public T Last()
         {
+            if (_last == null)
+                return default(T);
             return _last.Value;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
