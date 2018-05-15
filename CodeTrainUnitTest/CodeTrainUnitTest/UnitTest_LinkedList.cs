@@ -91,7 +91,7 @@ namespace CodeTrainUnitTest
             list.Add(2);
             list.Add(3);
 
-            var j = 0;
+            var j = 1;
             foreach (var i in list)
             {
                 Assert.Equal(j++, i);

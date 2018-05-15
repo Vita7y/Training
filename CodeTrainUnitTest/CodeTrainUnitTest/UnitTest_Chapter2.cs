@@ -10,9 +10,9 @@ namespace CodeTrainUnitTest
         {
             var str = Chapter2LinkedLists.DeleteDublicate("abcd");
             Assert.Equal("abcd", str);
-            str = Chapter2LinkedLists.DeleteDublicate("abbbcd");
+            str = Chapter2LinkedLists.DeleteDublicate("abcbdb");
             Assert.Equal("abcd", str);
-            str = Chapter2LinkedLists.DeleteDublicate("abbbcccccdbbb");
+            str = Chapter2LinkedLists.DeleteDublicate("abcbcbcbcbcbcbcdbbb");
             Assert.Equal("abcdb", str);
         }
     }

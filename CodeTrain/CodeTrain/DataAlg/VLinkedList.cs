@@ -6,7 +6,7 @@ namespace CodeTrain.DataAlg
 {
     public class VLinkedList<T>:IEnumerable<T>
     {
-        private class Node
+        public class Node
         {
             public Node Next;
             public Node Prev;
@@ -39,6 +39,21 @@ namespace CodeTrain.DataAlg
             _last = node;
         }
 
+        public void Delete(Node node)
+        {
+            _count--;
+
+            if (node == _first)
+                _first = node?.Next;
+            if (node == _last)
+                _last = node?.Prev;
+
+            if (node.Next != null)
+                node.Next.Prev = node.Prev;
+            if (node.Prev != null)
+                node.Prev.Next = node.Next;
+        }
+
         public void Delete(T item)
         {
             var cur = _first;
@@ -46,17 +61,7 @@ namespace CodeTrain.DataAlg
             {
                 if (cur.Value.Equals(item))
                 {
-                    _count--;
-
-                    if (cur == _first)
-                        _first = cur?.Next;
-                    if (cur == _last)
-                        _last = cur?.Prev;
-
-                    if (cur.Next != null)
-                        cur.Next.Prev = cur.Prev;
-                    if (cur.Prev != null)
-                        cur.Prev.Next = cur.Next;
+                    Delete(cur);
                     return;
                 }
 
@@ -79,6 +84,30 @@ namespace CodeTrain.DataAlg
             return _count;
         }
 
+        public Node Find(T value)
+        {
+            var node = _first;
+            for (int i = 0; i < _count; i++)
+            {
+                if (node.Value.Equals(value))
+                    return node;
+                node = node.Next;
+            }
+            return null;
+        }
+
+        public Node FindLast(T value)
+        {
+            var node = _last;
+            for (int i = 0; i < _count; i++)
+            {
+                if (node.Value.Equals(value))
+                    return node;
+                node = node.Prev;
+            }
+            return null;
+        }
+
         public T First()
         {
             if (_first == null)
@@ -93,9 +122,15 @@ namespace CodeTrain.DataAlg
             return _last.Value;
         }
 
+
         public IEnumerator<T> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            var node = _first;
+            for (int i = 0; i < _count; i++)
+            {
+                yield return node.Value;
+                node = node.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
