@@ -13,7 +13,7 @@ namespace CodeTrainUnitTest
             str = Chapter2LinkedLists.DeleteDublicate("abcbdb");
             Assert.Equal("abcd", str);
             str = Chapter2LinkedLists.DeleteDublicate("abcbcbcbcbcbcbcdbbb");
-            Assert.Equal("abcdb", str);
+            Assert.Equal("abcd", str);
         }
     }
 }
