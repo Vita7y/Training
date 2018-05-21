@@ -23,6 +23,14 @@ namespace CodeTrain.DataAlg
             _count = 0;
         }
 
+        public void Add(IList<T> list)
+        {
+            foreach (var item in list)
+            {
+                Add(item);
+            }
+        }
+
         public void Add(T item)
         {
             _count++;
@@ -113,6 +121,11 @@ namespace CodeTrain.DataAlg
             if (_first == null)
                 return default(T);
             return _first.Value;
+        }
+
+        public Node FirstNode()
+        {
+            return _first;
         }
 
         public T Last()

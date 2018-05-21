@@ -31,5 +31,19 @@ namespace CodeTrain
                 last = list.FindLast(ch);
             }
         }
+
+        ///2.2. Реализуйте алгоритм для нахождения в односвязном списке k-го элемента с конца.
+        public static T GetElementFromEnd<T>(VLinkedList<T> list, int numFromEnd)
+        {
+            var realNum = list.Count() - numFromEnd;
+            var node = list.FirstNode();
+
+            for (int i = 0; i < realNum-1; i++)
+            {
+                node = node.Next;
+            }
+
+            return node.Value;
+        }
     }
 }
